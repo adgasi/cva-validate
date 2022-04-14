@@ -1,0 +1,12 @@
+<form #proofForm="ngForm" novalidate>
+  <button type="button" (click)="setModelText()">Set model text</button>
+  <button type="button" (click)="setNumber()">Randomize</button>
+  <h3>{{ rndNumber }}</h3>
+
+  <custom-form-field
+    name="myCustomFormField"
+    [ngModel]="myModel"
+    (ngModelChange)="onModelChange($event)"
+    [rndNumber]="rndNumber"
+  ></custom-form-field>
+</form>

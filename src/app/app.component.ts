@@ -1,26 +1,26 @@
-import { Component, ViewChild } from '@angular/core';
-import {
-  CustomFormFieldComponent,
-  IModel,
-} from './custom-form-field/custom-form-field.component';
+import { Component } from '@angular/core';
+import { IModel } from './custom-form-field/custom-form-field.component';
 
+// Possible solutions:
+// Initial idea.
+// Model must be an object, and I pass a new reference. Bad because parent needs to control when the child gets updated.\
+//
+// Corret approach
+// Create setter on given @Input in child component, registerOnValidatorChange from Validator interface and then call onValidatorAccessor
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  rndNumber = 0;
+  rndNumber = 7;
 
   myModel: IModel = {
     text: 'foo',
   };
 
-  // TODO: how to trigger validate() when myModel is primitive?
-  // e.g. myModel = 'foo'
   setNumber() {
     this.rndNumber = Math.random();
-    this.myModel = { ...this.myModel };
   }
 
   setModelText() {

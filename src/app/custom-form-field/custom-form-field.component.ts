@@ -31,11 +31,22 @@ export class CustomFormFieldComponent
 {
   @Input() ngModel: IModel | undefined;
 
-  @Input() rndNumber = 0;
+  @Input()
+  set rndNumber(value: number) {
+    this._rndNumber = value;
+    this.onValidatorAccessor();
+  }
+  get rndNumber() {
+    return this._rndNumber;
+  }
+  private _rndNumber = 0;
 
   value: IModel | undefined;
+
   onChangeAccessor = (_: any) => {};
   onTouchAccessor = (_: any) => {};
+  onValidatorAccessor = () => {};
+
   registerOnChange(fn: any) {
     this.onChangeAccessor = fn;
   }
@@ -44,8 +55,12 @@ export class CustomFormFieldComponent
     this.onTouchAccessor = fn;
   }
 
+  registerOnValidatorChange(fn: () => void): void {
+    this.onValidatorAccessor = fn;
+  }
+
   writeValue(value: IModel) {
-    console.log('writeValue!', value);
+    console.log('writeValue!', 'value', value, this.rndNumber);
     this.value = value;
   }
 
@@ -54,7 +69,7 @@ export class CustomFormFieldComponent
   }
 
   validate() {
-    console.log('validate', this.rndNumber);
+    console.log('validate', 'value', this.value, 'rndNumber', this.rndNumber);
     return null;
   }
 }
